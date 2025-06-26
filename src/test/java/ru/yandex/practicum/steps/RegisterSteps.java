@@ -12,8 +12,8 @@ import ru.yandex.practicum.pages.RegisterPage;
 import java.time.Duration;
 
 import static org.junit.Assert.assertEquals;
-import static ru.yandex.practicum.constant.EnvConst.EXPLICIT_TIMEOUT;
-import static ru.yandex.practicum.constant.EnvConst.LOGIN_PAGE_URL;
+import static org.junit.Assert.assertTrue;
+import static ru.yandex.practicum.constant.EnvConst.*;
 
 
 public class RegisterSteps {
@@ -42,7 +42,17 @@ public class RegisterSteps {
     public void checkRegisterRedirectToLogin() {
         new WebDriverWait(driver, Duration.ofSeconds(EXPLICIT_TIMEOUT))
                 .until(ExpectedConditions.urlContains("/login"));
-        assertEquals("Incorrect URL after registration user", LOGIN_PAGE_URL, registerPage.registerRedirectToLoginURL());
+        assertEquals("Incorrect URL after registration user", LOGIN_PAGE_URL, driver.getCurrentUrl());
+    }
+
+    @Step("Correct password error message")
+    public void checkIncorrectPasswordErrorMessage() {
+        new WebDriverWait(driver, Duration.ofSeconds(EXPLICIT_TIMEOUT))
+                .until(ExpectedConditions.visibilityOfElementLocated(registerPage.getRegisterPasswordInputErrorElement()));
+        assertTrue("Password error message element not on page", driver.findElement(registerPage.getRegisterPasswordInputErrorElement()).isDisplayed());
+        assertEquals("Error message text is different", INCORRECT_PASSWORD_REGISTER_ERROR_MSG,
+                driver.findElement(registerPage.getRegisterPasswordInputErrorElement()).getText());
+        Allure.step("Password error message: " + driver.findElement(registerPage.getRegisterPasswordInputErrorElement()).getText());
     }
 
     @Step("Delete user")

@@ -59,8 +59,4 @@ public class LoginPage {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         return (String) js.executeScript("return window.localStorage.getItem('accessToken');");
     }
-
-    public String loginRedirectToMainURL() {
-        return driver.getCurrentUrl();
-    }
 }

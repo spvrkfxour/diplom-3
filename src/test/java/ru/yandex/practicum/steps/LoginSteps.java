@@ -36,6 +36,6 @@ public class LoginSteps {
     public void checkLoginRedirectToMain() {
         new WebDriverWait(driver, Duration.ofSeconds(EXPLICIT_TIMEOUT))
                 .until(ExpectedConditions.urlToBe(URL));
-        assertEquals("Incorrect URL after login user", URL, loginPage.loginRedirectToMainURL());
+        assertEquals("Incorrect URL after login user", URL, driver.getCurrentUrl());
     }
 }

@@ -1,5 +1,7 @@
 package ru.yandex.practicum;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.junit4.DisplayName;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.After;
 import org.junit.Before;
@@ -45,11 +47,22 @@ public class RegisterTest {
     }
 
     @Test
+    @DisplayName("Create user with random valid parameters")
+    @Description("Success create user with random valid parameters, login this user and redirect to main page")
     public void registerValidTest() {
         registerSteps.registerUser(registerName, registerEmail, registerPassword);
         registerSteps.checkRegisterRedirectToLogin();
         loginSteps.loginUser(registerEmail, registerPassword);
         loginSteps.checkLoginRedirectToMain();
+    }
+
+    @Test
+    @DisplayName("Get password error message")
+    @Description("Failed create user with password less then 6 digits")
+    public void registerWithPasswordLessThen6Test() {
+        registerPassword = generateRandomString(1, 5);
+        registerSteps.registerUser(registerName, registerEmail, registerPassword);
+        registerSteps.checkIncorrectPasswordErrorMessage();
     }
 
     @After

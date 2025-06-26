@@ -14,6 +14,7 @@ public class RegisterPage {
     private final By registerEmailInput = By.xpath("//label[text()='Email']/../*[self::input]");
     private final By registerPasswordInput = By.xpath("//label[text()='Пароль']/../*[self::input]");
     private final By registerButton = By.xpath("//button[text()='Зарегистрироваться']");
+    private final By registerPasswordInputError = By.cssSelector("p.input__error.text_type_main-default");
 
     public RegisterPage(WebDriver driver) {
         this.driver = driver;
@@ -65,7 +66,7 @@ public class RegisterPage {
         clickRegisterButton();
     }
 
-    public String registerRedirectToLoginURL() {
-        return driver.getCurrentUrl();
+    public By getRegisterPasswordInputErrorElement() {
+        return registerPasswordInputError;
     }
 }
