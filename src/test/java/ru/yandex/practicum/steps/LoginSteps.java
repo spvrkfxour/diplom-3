@@ -1,9 +1,12 @@
 package ru.yandex.practicum.steps;
 
+import io.qameta.allure.Allure;
 import io.qameta.allure.Step;
+import io.restassured.response.Response;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import ru.yandex.practicum.api.UserApi;
 import ru.yandex.practicum.pages.LoginPage;
 
 import java.time.Duration;
@@ -15,6 +18,7 @@ import static ru.yandex.practicum.constant.EnvConst.*;
 public class LoginSteps {
 
     private final LoginPage loginPage;
+    private final UserApi userApi = new UserApi();
     private WebDriver driver;
 
     public LoginSteps(WebDriver driver) {
@@ -30,6 +34,12 @@ public class LoginSteps {
     @Step("Login user")
     public void loginUser(String email, String password) {
         loginPage.loginUser(email, password);
+    }
+
+    @Step("Create user")
+    public void createUser(String email, String password, String name) {
+        Response response = userApi.createUser(email, password, name);
+        Allure.step("Create user: " + response.getBody().asString());
     }
 
     @Step("Redirect to main page")

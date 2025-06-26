@@ -4,7 +4,6 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.rules.ExternalResource;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 
 public class DriverFactory extends ExternalResource {
@@ -21,9 +20,6 @@ public class DriverFactory extends ExternalResource {
         String browser = System.getProperty("browser", "chrome").toLowerCase();
 
         switch (browser) {
-            case "firefox":
-                startFirefox();
-                break;
             case "yandex":
                 startYandex();
                 break;
@@ -41,11 +37,6 @@ public class DriverFactory extends ExternalResource {
     private void startChrome() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
-    }
-
-    private void startFirefox() {
-        WebDriverManager.firefoxdriver().setup();
-        driver = new FirefoxDriver();
     }
 
     private void startYandex() {

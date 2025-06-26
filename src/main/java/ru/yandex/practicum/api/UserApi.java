@@ -29,4 +29,14 @@ public class UserApi {
                 .post(LOGIN_USER_ENDPOINT)
                 .path("accessToken");
     }
+
+    public Response createUser(String email, String password, String name) {
+
+        return given()
+                .contentType(ContentType.JSON)
+                .baseUri(URL)
+                .body("{\"email\": \"" + email + "\", \"password\": \"" + password + "\", \"name\": \"" + name + "\"}")
+                .when()
+                .post(CREATE_USER_ENDPOINT);
+    }
 }
