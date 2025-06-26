@@ -59,6 +59,7 @@ public class LoginTest {
         mainPageSteps.checkMainRedirectToLogin();
         loginSteps.loginUser(registerEmail, registerPassword);
         loginSteps.checkLoginRedirectToMain();
+        loginSteps.checkLoginUser();
     }
 
     @After
