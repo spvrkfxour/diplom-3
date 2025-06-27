@@ -32,6 +32,11 @@ public class MainPageSteps {
         mainPage.clickLoginAccountButton();
     }
 
+    @Step("Login from account profile page button")
+    public void loginUserFromAccountProfilePageButton() {
+        mainPage.clickAccountProfileButton();
+    }
+
     @Step("Redirect to login page")
     public void checkMainRedirectToLogin() {
         new WebDriverWait(driver, Duration.ofSeconds(EXPLICIT_TIMEOUT))

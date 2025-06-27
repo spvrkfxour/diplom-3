@@ -20,12 +20,14 @@ public class LoginSteps {
 
     private final LoginPage loginPage;
     private final MainPage mainPage;
+    private final AccountPageSteps accountPageSteps;
     private final UserApi userApi = new UserApi();
     private WebDriver driver;
 
     public LoginSteps(WebDriver driver) {
         this.loginPage = new LoginPage(driver);
         this.mainPage = new MainPage(driver);
+        this.accountPageSteps = new AccountPageSteps(driver);
         this.driver = driver;
     }
 
@@ -46,11 +48,11 @@ public class LoginSteps {
     }
 
     @Step("Check user is login")
-    public void checkLoginUser() {
+    public void checkUserIsLogin() {
         mainPage.clickAccountProfileButton();
         new WebDriverWait(driver, Duration.ofSeconds(EXPLICIT_TIMEOUT))
-                .until(ExpectedConditions.urlToBe(ACCOUNT_PROFILE_URL));
-        assertEquals("Account profile page do not open", ACCOUNT_PROFILE_URL, driver.getCurrentUrl());
+                .until(ExpectedConditions.urlToBe(ACCOUNT_PROFILE_PAGE_URL));
+        assertEquals("Account profile page do not open", ACCOUNT_PROFILE_PAGE_URL, driver.getCurrentUrl());
     }
 
     @Step("Redirect to main page")
@@ -58,5 +60,13 @@ public class LoginSteps {
         new WebDriverWait(driver, Duration.ofSeconds(EXPLICIT_TIMEOUT))
                 .until(ExpectedConditions.urlToBe(URL));
         assertEquals("Incorrect URL after login user", URL, driver.getCurrentUrl());
+    }
+
+    @Step("Check login user is correct")
+    public void checkLoginUser(String email, String password) {
+        loginUser(email, password);
+        checkLoginRedirectToMain();
+        checkUserIsLogin();
+        accountPageSteps.checkAccountEmail(email);
     }
 }

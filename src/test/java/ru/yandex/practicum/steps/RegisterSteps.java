@@ -38,6 +38,11 @@ public class RegisterSteps {
         registerPage.registerUser(name, email, password);
     }
 
+    @Step("Login from register page button")
+    public void loginUserFromRegisterPageButton() {
+        registerPage.clickLoginButton();
+    }
+
     @Step("Redirect to login page")
     public void checkRegisterRedirectToLogin() {
         new WebDriverWait(driver, Duration.ofSeconds(EXPLICIT_TIMEOUT))

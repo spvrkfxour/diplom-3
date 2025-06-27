@@ -13,7 +13,8 @@ public class EnvConst {
 
     public final static String REGISTER_PAGE_URL = "https://stellarburgers.nomoreparties.site/register";
     public final static String LOGIN_PAGE_URL = "https://stellarburgers.nomoreparties.site/login";
-    public final static String ACCOUNT_PROFILE_URL = "https://stellarburgers.nomoreparties.site/account/profile";
+    public final static String ACCOUNT_PROFILE_PAGE_URL = "https://stellarburgers.nomoreparties.site/account/profile";
+    public final static String PASSWORD_RECOVERY_PAGE_URL = "https://stellarburgers.nomoreparties.site/forgot-password";
 
     public static final int EXPLICIT_TIMEOUT = 3;
 
