@@ -1,7 +1,6 @@
 package ru.yandex.practicum;
 
 import io.qameta.allure.Allure;
-import io.qameta.allure.Description;
 import io.qameta.allure.Step;
 import io.qameta.allure.junit4.DisplayName;
 import org.apache.commons.lang3.RandomStringUtils;

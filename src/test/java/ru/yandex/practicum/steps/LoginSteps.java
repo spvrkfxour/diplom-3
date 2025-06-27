@@ -47,7 +47,7 @@ public class LoginSteps {
         Allure.step("Create user: " + response.getBody().asString());
     }
 
-    @Step("Check user is login")
+    @Step("Check user is login in account page")
     public void checkUserIsLogin() {
         mainPage.clickAccountProfileButton();
         new WebDriverWait(driver, Duration.ofSeconds(EXPLICIT_TIMEOUT))
