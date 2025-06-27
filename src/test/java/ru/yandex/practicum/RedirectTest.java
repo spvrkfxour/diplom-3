@@ -56,7 +56,7 @@ public class RedirectTest {
     }
 
     @Test
-    @DisplayName("Not auth user redirect to register page")
+    @DisplayName("Not auth user redirect to login page")
     public void notAuthUserRedirectToRegisterTest() {
         mainPageSteps.openMainPage();
         mainPageSteps.loginUserFromAccountProfilePageButton();
@@ -67,8 +67,7 @@ public class RedirectTest {
     @DisplayName("Auth user redirect to account page")
     public void authUserRedirectToAccountPageTest() {
         mainPageSteps.openMainPage();
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window.localStorage.setItem('accessToken', '" + userApi.getAccessToken(registerEmail, registerPassword) + "');");
+        loginSteps.addAccessTokenToLocalStorage(registerEmail, registerPassword);
         loginSteps.checkUserIsLogin();
         accountPageSteps.checkAccountEmail(registerEmail);
     }

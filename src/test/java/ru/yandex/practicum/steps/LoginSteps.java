@@ -3,6 +3,7 @@ package ru.yandex.practicum.steps;
 import io.qameta.allure.Allure;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -68,5 +69,11 @@ public class LoginSteps {
         checkLoginRedirectToMain();
         checkUserIsLogin();
         accountPageSteps.checkAccountEmail(email);
+    }
+
+    @Step("Add access token to local storage")
+    public void addAccessTokenToLocalStorage(String email, String password) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.localStorage.setItem('accessToken', '" + userApi.getAccessToken(email, password) + "');");
     }
 }
