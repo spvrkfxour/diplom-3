@@ -6,9 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import ru.yandex.practicum.api.UserApi;
 import ru.yandex.practicum.steps.AccountPageSteps;
 import ru.yandex.practicum.steps.LoginSteps;
 import ru.yandex.practicum.steps.MainPageSteps;
@@ -29,7 +27,6 @@ public class RedirectTest {
     private RegisterSteps registerSteps;
     private MainPageSteps mainPageSteps;
     private AccountPageSteps accountPageSteps;
-    private final UserApi userApi = new UserApi();
 
     private String registerName;
     private String registerEmail;
