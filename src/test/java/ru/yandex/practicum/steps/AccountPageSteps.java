@@ -22,6 +22,13 @@ public class AccountPageSteps {
         this.driver = driver;
     }
 
+    @Step("Click logout button")
+    public void clickLogoutButton() {
+        new WebDriverWait(driver, Duration.ofSeconds(EXPLICIT_TIMEOUT))
+                .until(ExpectedConditions.elementToBeClickable(accountPage.getLogoutButton()));
+        accountPage.clickLogoutButton();
+    }
+
     @Step("Check user email equals account email")
     public void checkAccountEmail(String email) {
         String accountEmail = driver.findElement(accountPage.getAccountProfileEmail()).getDomAttribute("value");

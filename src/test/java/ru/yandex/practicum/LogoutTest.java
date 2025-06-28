@@ -17,14 +17,14 @@ import java.util.concurrent.ThreadLocalRandom;
 import static ru.yandex.practicum.constant.EnvConst.DOMAINS;
 
 
-public class RedirectTest {
+public class LogoutTest {
 
     @Rule
     public final DriverFactory driverFactory = new DriverFactory();
 
     private WebDriver driver;
-    private LoginSteps loginSteps;
     private RegisterSteps registerSteps;
+    private LoginSteps loginSteps;
     private MainPageSteps mainPageSteps;
     private AccountPageSteps accountPageSteps;
 
@@ -52,39 +52,19 @@ public class RedirectTest {
         loginSteps.createUser(registerEmail, registerPassword, registerName);
 
         mainPageSteps.openMainPage();
+        mainPageSteps.clickAccountProfilePageButton();
+        loginSteps.loginUser(registerEmail, registerPassword);
+        mainPageSteps.clickAccountProfilePageButton();
     }
 
     @Test
-    @DisplayName("Not auth user redirect to login page")
-    public void notAuthUserRedirectToRegisterTest() {
+    @DisplayName("User logout")
+    public void userLogoutTest() {
+        accountPageSteps.clickLogoutButton();
+        mainPageSteps.checkMainRedirectToLogin();
+        loginSteps.checkNullAccessTokenInLocalStorage();
         mainPageSteps.clickAccountProfilePageButton();
         mainPageSteps.checkMainRedirectToLogin();
-    }
-
-    @Test
-    @DisplayName("Auth user redirect to account page")
-    public void authUserRedirectToAccountPageTest() {
-        loginSteps.addAccessTokenToLocalStorage(registerEmail, registerPassword);
-        loginSteps.checkUserIsLogin();
-        accountPageSteps.checkAccountEmail(registerEmail);
-    }
-
-    @Test
-    @DisplayName("Constructor tab redirect to main page from account page")
-    public void constructorTabRedirectToMainPageTest() {
-        loginSteps.addAccessTokenToLocalStorage(registerEmail, registerPassword);
-        mainPageSteps.clickAccountProfilePageButton();
-        mainPageSteps.clickConstructorButton();
-        accountPageSteps.checkAccountPageRedirectToMain();
-    }
-
-    @Test
-    @DisplayName("Logo redirect to main page from account page")
-    public void logoRedirectToMainPageTest() {
-        loginSteps.addAccessTokenToLocalStorage(registerEmail, registerPassword);
-        mainPageSteps.clickAccountProfilePageButton();
-        mainPageSteps.clickLogo();
-        accountPageSteps.checkAccountPageRedirectToMain();
     }
 
     @After

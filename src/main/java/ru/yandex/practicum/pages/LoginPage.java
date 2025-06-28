@@ -1,9 +1,7 @@
 package ru.yandex.practicum.pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import static ru.yandex.practicum.constant.EnvConst.LOGIN_PAGE_URL;
 
 
 public class LoginPage {

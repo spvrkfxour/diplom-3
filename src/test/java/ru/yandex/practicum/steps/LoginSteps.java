@@ -14,6 +14,7 @@ import ru.yandex.practicum.pages.MainPage;
 import java.time.Duration;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static ru.yandex.practicum.constant.EnvConst.*;
 
 
@@ -70,5 +71,12 @@ public class LoginSteps {
     public void addAccessTokenToLocalStorage(String email, String password) {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.localStorage.setItem('accessToken', '" + userApi.getAccessToken(email, password) + "');");
+    }
+
+    @Step("Check null access token in local storage")
+    public void checkNullAccessTokenInLocalStorage() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        String token = (String) js.executeScript("return localStorage.getItem('accessToken');");
+        assertNull("Access token not delete after logout", token);
     }
 }

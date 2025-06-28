@@ -95,7 +95,7 @@ public class LoginTest {
                 break;
             case PROFILE_PAGE_BUTTON:
                 mainPageSteps.openMainPage();
-                mainPageSteps.loginUserFromAccountProfilePageButton();
+                mainPageSteps.clickAccountProfilePageButton();
                 break;
             case REGISTER_PAGE_BUTTON:
                 registerSteps.openRegisterPage();

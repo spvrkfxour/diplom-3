@@ -33,7 +33,7 @@ public class MainPageSteps {
     }
 
     @Step("Click on account profile page button")
-    public void loginUserFromAccountProfilePageButton() {
+    public void clickAccountProfilePageButton() {
         mainPage.clickAccountProfileButton();
     }
 
