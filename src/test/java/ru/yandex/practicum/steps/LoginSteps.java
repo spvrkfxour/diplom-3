@@ -32,11 +32,6 @@ public class LoginSteps {
         this.driver = driver;
     }
 
-    @Step("Open login page")
-    public void openLoginPage() {
-        loginPage.openPage();
-    }
-
     @Step("Login user")
     public void loginUser(String email, String password) {
         loginPage.loginUser(email, password);

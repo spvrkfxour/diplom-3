@@ -32,9 +32,19 @@ public class MainPageSteps {
         mainPage.clickLoginAccountButton();
     }
 
-    @Step("Login from account profile page button")
+    @Step("Click on account profile page button")
     public void loginUserFromAccountProfilePageButton() {
         mainPage.clickAccountProfileButton();
+    }
+
+    @Step("Click on logo")
+    public void clickLogo() {
+        mainPage.clickLogo();
+    }
+
+    @Step("Click on constructor tab")
+    public void clickConstructorButton() {
+        mainPage.clickConstructorButton();
     }
 
     @Step("Redirect to login page")

@@ -18,10 +18,6 @@ public class LoginPage {
         this.driver = driver;
     }
 
-    public void openPage() {
-        driver.get(LOGIN_PAGE_URL);
-    }
-
     public void clickLoginEmailInput() {
         driver.findElement(loginEmailInput).click();
     }
@@ -52,10 +48,5 @@ public class LoginPage {
     public void loginUser(String email, String password) {
         fillLoginForm(email, password);
         clickLoginButton();
-    }
-
-    public String getAccessTokenFromLocalStorage(WebDriver driver) {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        return (String) js.executeScript("return window.localStorage.getItem('accessToken');");
     }
 }

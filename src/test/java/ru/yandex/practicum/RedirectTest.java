@@ -50,12 +50,13 @@ public class RedirectTest {
         registerPassword = generateRandomString(6, 15);
 
         loginSteps.createUser(registerEmail, registerPassword, registerName);
+
+        mainPageSteps.openMainPage();
     }
 
     @Test
     @DisplayName("Not auth user redirect to login page")
     public void notAuthUserRedirectToRegisterTest() {
-        mainPageSteps.openMainPage();
         mainPageSteps.loginUserFromAccountProfilePageButton();
         mainPageSteps.checkMainRedirectToLogin();
     }
@@ -63,10 +64,27 @@ public class RedirectTest {
     @Test
     @DisplayName("Auth user redirect to account page")
     public void authUserRedirectToAccountPageTest() {
-        mainPageSteps.openMainPage();
         loginSteps.addAccessTokenToLocalStorage(registerEmail, registerPassword);
         loginSteps.checkUserIsLogin();
         accountPageSteps.checkAccountEmail(registerEmail);
+    }
+
+    @Test
+    @DisplayName("Constructor tab redirect to main page from account page")
+    public void constructorTabRedirectToMainPageTest() {
+        loginSteps.addAccessTokenToLocalStorage(registerEmail, registerPassword);
+        mainPageSteps.loginUserFromAccountProfilePageButton();
+        mainPageSteps.clickConstructorButton();
+        accountPageSteps.checkAccountPageRedirectToMain();
+    }
+
+    @Test
+    @DisplayName("Logo redirect to main page from account page")
+    public void logoRedirectToMainPageTest() {
+        loginSteps.addAccessTokenToLocalStorage(registerEmail, registerPassword);
+        mainPageSteps.loginUserFromAccountProfilePageButton();
+        mainPageSteps.clickLogo();
+        accountPageSteps.checkAccountPageRedirectToMain();
     }
 
     @After

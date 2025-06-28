@@ -7,11 +7,9 @@ import ru.yandex.practicum.pages.PasswordRecoveryPage;
 
 public class PasswordRecoveryPageSteps {
     private final PasswordRecoveryPage passwordRecoveryPage;
-    private WebDriver driver;
 
     public PasswordRecoveryPageSteps(WebDriver driver) {
         this.passwordRecoveryPage = new PasswordRecoveryPage(driver);
-        this.driver = driver;
     }
 
     @Step("Open password recovery page")
