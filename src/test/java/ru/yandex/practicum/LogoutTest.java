@@ -41,9 +41,9 @@ public class LogoutTest {
 
         createTestUser();
         mainPageSteps.openMainPage();
-        mainPageSteps.clickAccountProfilePageButton();
+        mainPageSteps.clickAccountProfilePageButtonToLogin();
         loginSteps.loginUser(registerEmail, registerPassword);
-        mainPageSteps.clickAccountProfilePageButton();
+        mainPageSteps.clickAccountProfilePageButtonToAccount();
     }
 
     private void createTestUser() {
@@ -66,7 +66,7 @@ public class LogoutTest {
         accountPageSteps.clickLogoutButton();
         mainPageSteps.checkMainRedirectToLogin();
         loginSteps.checkNullAccessTokenInLocalStorage();
-        mainPageSteps.clickAccountProfilePageButton();
+        mainPageSteps.clickAccountProfilePageButtonToLogin();
         mainPageSteps.checkMainRedirectToLogin();
     }
 

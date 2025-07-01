@@ -63,7 +63,7 @@ public class RedirectTest {
     @Test
     @DisplayName("Not auth user redirect to login page")
     public void notAuthUserRedirectToRegisterTest() {
-        mainPageSteps.clickAccountProfilePageButton();
+        mainPageSteps.clickAccountProfilePageButtonToLogin();
         mainPageSteps.checkMainRedirectToLogin();
     }
 
@@ -79,7 +79,7 @@ public class RedirectTest {
     @DisplayName("Constructor tab redirect to main page from account page")
     public void constructorTabRedirectToMainPageTest() {
         loginSteps.addAccessTokenToLocalStorage(request);
-        mainPageSteps.clickAccountProfilePageButton();
+        mainPageSteps.clickAccountProfilePageButtonToAccount();
         mainPageSteps.clickConstructorButton();
         accountPageSteps.checkAccountPageRedirectToMain();
     }
@@ -88,7 +88,7 @@ public class RedirectTest {
     @DisplayName("Logo redirect to main page from account page")
     public void logoRedirectToMainPageTest() {
         loginSteps.addAccessTokenToLocalStorage(request);
-        mainPageSteps.clickAccountProfilePageButton();
+        mainPageSteps.clickAccountProfilePageButtonToAccount();
         mainPageSteps.clickLogo();
         accountPageSteps.checkAccountPageRedirectToMain();
     }

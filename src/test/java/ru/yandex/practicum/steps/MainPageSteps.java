@@ -9,6 +9,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import ru.yandex.practicum.pages.AccountPage;
+import ru.yandex.practicum.pages.LoginPage;
 import ru.yandex.practicum.pages.MainPage;
 import java.time.Duration;
 
@@ -18,9 +20,13 @@ public class MainPageSteps {
     private final MainPage mainPage;
     private WebDriver driver;
     private final WebDriverWait wait;
+    private final LoginPage loginPage;
+    private final AccountPage accountPage;
 
     public MainPageSteps(WebDriver driver) {
         this.mainPage = new MainPage(driver);
+        this.loginPage = new LoginPage(driver);
+        this.accountPage = new AccountPage(driver);
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(EXPLICIT_TIMEOUT));
     }
@@ -36,8 +42,15 @@ public class MainPageSteps {
     }
 
     @Step("Click on account profile page button")
-    public void clickAccountProfilePageButton() {
+    public void clickAccountProfilePageButtonToLogin() {
         mainPage.clickAccountProfileButton();
+        loginPage.redirectToLoginPageLoader();
+    }
+
+    @Step("Click on account profile page button")
+    public void clickAccountProfilePageButtonToAccount() {
+        mainPage.clickAccountProfileButton();
+        accountPage.redirectToAccountPageLoader();
     }
 
     @Step("Click on logo")
@@ -67,8 +80,7 @@ public class MainPageSteps {
 
     @Step("Redirect to login page")
     public void checkMainRedirectToLogin() {
-        new WebDriverWait(driver, Duration.ofSeconds(EXPLICIT_TIMEOUT))
-                .until(ExpectedConditions.urlToBe(LOGIN_PAGE_URL));
+        loginPage.redirectToLoginPageLoader();
         assertEquals("Incorrect URL after click button user", LOGIN_PAGE_URL, driver.getCurrentUrl());
     }
 

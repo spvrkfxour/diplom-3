@@ -6,16 +6,12 @@ import static ru.yandex.practicum.constant.EnvConst.*;
 import io.qameta.allure.Allure;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.yandex.practicum.api.UserApi;
 import ru.yandex.practicum.dto.CreateUserRequest;
 import ru.yandex.practicum.dto.LoginUserRequest;
 import ru.yandex.practicum.pages.LoginPage;
 import ru.yandex.practicum.pages.MainPage;
-import java.time.Duration;
 
 
 public class LoginSteps {
@@ -23,6 +19,7 @@ public class LoginSteps {
     private final LoginPage loginPage;
     private final MainPage mainPage;
     private final AccountPageSteps accountPageSteps;
+    private final MainPageSteps mainPageSteps;
     private final UserApi userApi = new UserApi();
     private WebDriver driver;
 
@@ -30,6 +27,7 @@ public class LoginSteps {
         this.loginPage = new LoginPage(driver);
         this.mainPage = new MainPage(driver);
         this.accountPageSteps = new AccountPageSteps(driver);
+        this.mainPageSteps = new MainPageSteps(driver);
         this.driver = driver;
     }
 
@@ -46,16 +44,13 @@ public class LoginSteps {
 
     @Step("Check user is login in account page")
     public void checkUserIsLogin() {
-        mainPage.clickAccountProfileButton();
-        new WebDriverWait(driver, Duration.ofSeconds(EXPLICIT_TIMEOUT))
-                .until(ExpectedConditions.urlToBe(ACCOUNT_PROFILE_PAGE_URL));
+        mainPageSteps.clickAccountProfilePageButtonToAccount();
         assertEquals("Account profile page do not open", ACCOUNT_PROFILE_PAGE_URL, driver.getCurrentUrl());
     }
 
     @Step("Redirect to main page")
     public void checkLoginRedirectToMain() {
-        new WebDriverWait(driver, Duration.ofSeconds(EXPLICIT_TIMEOUT))
-                .until(ExpectedConditions.urlToBe(URL));
+        mainPage.redirectToMainPageLoader();
         assertEquals("Incorrect URL after login user", URL, driver.getCurrentUrl());
     }
 
@@ -69,14 +64,12 @@ public class LoginSteps {
 
     @Step("Add access token to local storage")
     public void addAccessTokenToLocalStorage(LoginUserRequest request) {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window.localStorage.setItem('accessToken', '" + userApi.getAccessToken(request) + "');");
+        loginPage.addAccessTokenToLocalStorage(request);
     }
 
     @Step("Check null access token in local storage")
     public void checkNullAccessTokenInLocalStorage() {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        String token = (String) js.executeScript("return localStorage.getItem('accessToken');");
+        String token = loginPage.getAccessTokenFromLocalStorage();
         assertNull("Access token not delete after logout", token);
     }
 }

@@ -1,12 +1,13 @@
 package ru.yandex.practicum.pages;
 
-import static ru.yandex.practicum.constant.EnvConst.EXPLICIT_TIMEOUT;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
+
+import static ru.yandex.practicum.constant.EnvConst.*;
 
 
 @Getter
@@ -29,5 +30,10 @@ public class AccountPage {
 
     public String getAccountPageUserEmail() {
         return driver.findElement(getAccountProfileEmailInput()).getDomAttribute("value");
+    }
+
+    public void redirectToAccountPageLoader() {
+        new WebDriverWait(driver, Duration.ofSeconds(EXPLICIT_TIMEOUT))
+                .until(ExpectedConditions.urlToBe(ACCOUNT_PROFILE_PAGE_URL));
     }
 }
