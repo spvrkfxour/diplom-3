@@ -1,17 +1,15 @@
 package ru.yandex.practicum.steps;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static ru.yandex.practicum.constant.EnvConst.*;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.yandex.practicum.pages.MainPage;
-
 import java.time.Duration;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static ru.yandex.practicum.constant.EnvConst.*;
 
 
 public class MainPageSteps {

@@ -1,9 +1,8 @@
 package ru.yandex.practicum.pages;
 
+import static ru.yandex.practicum.constant.EnvConst.PASSWORD_RECOVERY_PAGE_URL;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-
-import static ru.yandex.practicum.constant.EnvConst.PASSWORD_RECOVERY_PAGE_URL;
 
 
 public class PasswordRecoveryPage {

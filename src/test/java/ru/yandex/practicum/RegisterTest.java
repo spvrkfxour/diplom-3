@@ -1,5 +1,6 @@
 package ru.yandex.practicum;
 
+import static ru.yandex.practicum.constant.EnvConst.DOMAINS;
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -8,12 +9,10 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
+import ru.yandex.practicum.dto.LoginUserRequest;
 import ru.yandex.practicum.steps.LoginSteps;
 import ru.yandex.practicum.steps.RegisterSteps;
-
 import java.util.concurrent.ThreadLocalRandom;
-
-import static ru.yandex.practicum.constant.EnvConst.DOMAINS;
 
 
 public class RegisterTest {
@@ -67,6 +66,7 @@ public class RegisterTest {
 
     @After
     public void tearDown() {
-        registerSteps.deleteUser(registerEmail, registerPassword);
+        LoginUserRequest request = new LoginUserRequest(registerEmail, registerPassword);
+        registerSteps.deleteUser(request);
     }
 }

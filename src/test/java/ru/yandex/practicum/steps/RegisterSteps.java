@@ -1,5 +1,8 @@
 package ru.yandex.practicum.steps;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static ru.yandex.practicum.constant.EnvConst.*;
 import io.qameta.allure.Allure;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
@@ -7,13 +10,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.yandex.practicum.api.UserApi;
+import ru.yandex.practicum.dto.LoginUserRequest;
 import ru.yandex.practicum.pages.RegisterPage;
-
 import java.time.Duration;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static ru.yandex.practicum.constant.EnvConst.*;
 
 
 public class RegisterSteps {
@@ -61,8 +60,8 @@ public class RegisterSteps {
     }
 
     @Step("Delete user")
-    public void deleteUser(String email, String password) {
-        accessToken = userApi.getAccessToken(email, password);
+    public void deleteUser(LoginUserRequest request) {
+        accessToken = userApi.getAccessToken(request);
         if (accessToken != null) {
             Response response = userApi.deleteUser(accessToken);
             Allure.step("Delete user: " + response.getBody().asString());

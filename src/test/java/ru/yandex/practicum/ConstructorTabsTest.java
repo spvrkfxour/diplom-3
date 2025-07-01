@@ -1,13 +1,12 @@
 package ru.yandex.practicum;
 
+import static ru.yandex.practicum.constant.EnvConst.*;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import ru.yandex.practicum.steps.MainPageSteps;
-
-import static ru.yandex.practicum.constant.EnvConst.*;
 
 
 public class ConstructorTabsTest {

@@ -1,5 +1,6 @@
 package ru.yandex.practicum;
 
+import static ru.yandex.practicum.constant.EnvConst.DOMAINS;
 import io.qameta.allure.Allure;
 import io.qameta.allure.Step;
 import io.qameta.allure.junit4.DisplayName;
@@ -11,14 +12,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openqa.selenium.WebDriver;
+import ru.yandex.practicum.dto.CreateUserRequest;
+import ru.yandex.practicum.dto.LoginUserRequest;
 import ru.yandex.practicum.steps.LoginSteps;
 import ru.yandex.practicum.steps.MainPageSteps;
 import ru.yandex.practicum.steps.PasswordRecoveryPageSteps;
 import ru.yandex.practicum.steps.RegisterSteps;
-
 import java.util.concurrent.ThreadLocalRandom;
-
-import static ru.yandex.practicum.constant.EnvConst.DOMAINS;
 
 
 @RunWith(Parameterized.class)
@@ -38,10 +38,6 @@ public class LoginTest {
     private String registerPassword;
 
     private EntryPoint entryPoint;
-
-    private String generateRandomString(int minLen, int maxLen) {
-        return RandomStringUtils.randomAlphanumeric(minLen, maxLen).toLowerCase();
-    }
 
     private enum EntryPoint {
         MAIN_PAGE_BUTTON, PROFILE_PAGE_BUTTON, REGISTER_PAGE_BUTTON, PASSWORD_RECOVERY_PAGE_BUTTON
@@ -69,13 +65,23 @@ public class LoginTest {
         mainPageSteps = new MainPageSteps(driver);
         passwordRecoveryPageSteps = new PasswordRecoveryPageSteps(driver);
 
+        createTestUser();
+    }
+
+    private void createTestUser() {
         registerName = generateRandomString(3, 12);
         registerEmail = generateRandomString(3, 12) + DOMAINS[ThreadLocalRandom.current().nextInt(DOMAINS.length)];
         //Длина пароля минимум 6 символов
         registerPassword = generateRandomString(6, 15);
 
-        loginSteps.createUser(registerEmail, registerPassword, registerName);
+        CreateUserRequest request = new CreateUserRequest(registerEmail, registerPassword, registerName);
+        loginSteps.createUser(request);
     }
+
+    private String generateRandomString(int minLen, int maxLen) {
+        return RandomStringUtils.randomAlphanumeric(minLen, maxLen).toLowerCase();
+    }
+
 
     @Test
     @DisplayName("Login user from different entry points")
@@ -109,6 +115,7 @@ public class LoginTest {
 
     @After
     public void tearDown() {
-        registerSteps.deleteUser(registerEmail, registerPassword);
+        LoginUserRequest request = new LoginUserRequest(registerEmail, registerPassword);
+        registerSteps.deleteUser(request);
     }
 }

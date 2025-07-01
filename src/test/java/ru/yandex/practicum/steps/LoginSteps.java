@@ -1,5 +1,8 @@
 package ru.yandex.practicum.steps;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static ru.yandex.practicum.constant.EnvConst.*;
 import io.qameta.allure.Allure;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
@@ -8,14 +11,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.yandex.practicum.api.UserApi;
+import ru.yandex.practicum.dto.CreateUserRequest;
+import ru.yandex.practicum.dto.LoginUserRequest;
 import ru.yandex.practicum.pages.LoginPage;
 import ru.yandex.practicum.pages.MainPage;
-
 import java.time.Duration;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static ru.yandex.practicum.constant.EnvConst.*;
 
 
 public class LoginSteps {
@@ -39,8 +39,8 @@ public class LoginSteps {
     }
 
     @Step("Create user")
-    public void createUser(String email, String password, String name) {
-        Response response = userApi.createUser(email, password, name);
+    public void createUser(CreateUserRequest request) {
+        Response response = userApi.createUser(request);
         Allure.step("Create user: " + response.getBody().asString());
     }
 
@@ -68,9 +68,9 @@ public class LoginSteps {
     }
 
     @Step("Add access token to local storage")
-    public void addAccessTokenToLocalStorage(String email, String password) {
+    public void addAccessTokenToLocalStorage(LoginUserRequest request) {
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window.localStorage.setItem('accessToken', '" + userApi.getAccessToken(email, password) + "');");
+        js.executeScript("window.localStorage.setItem('accessToken', '" + userApi.getAccessToken(request) + "');");
     }
 
     @Step("Check null access token in local storage")
