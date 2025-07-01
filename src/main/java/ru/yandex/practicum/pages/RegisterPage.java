@@ -1,9 +1,14 @@
 package ru.yandex.practicum.pages;
 
+import static ru.yandex.practicum.constant.EnvConst.EXPLICIT_TIMEOUT;
 import static ru.yandex.practicum.constant.EnvConst.REGISTER_PAGE_URL;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 
 @Getter
@@ -68,11 +73,16 @@ public class RegisterPage {
         clickRegisterButton();
     }
 
-    public By getRegisterPasswordInputErrorElement() {
-        return registerPasswordInputError;
+    public String getRegisterPasswordInputErrorText() {
+        return driver.findElement(registerPasswordInputError).getText();
     }
 
     public void clickLoginButton() {
         driver.findElement(loginButton).click();
+    }
+
+    public void passwordInputErrorLoader() {
+        new WebDriverWait(driver, Duration.ofSeconds(EXPLICIT_TIMEOUT))
+                .until(ExpectedConditions.visibilityOfElementLocated(registerPasswordInputError));
     }
 }

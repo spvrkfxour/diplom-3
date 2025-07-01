@@ -7,23 +7,23 @@ import io.qameta.allure.Allure;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.yandex.practicum.api.UserApi;
 import ru.yandex.practicum.dto.LoginUserRequest;
+import ru.yandex.practicum.pages.LoginPage;
 import ru.yandex.practicum.pages.RegisterPage;
-import java.time.Duration;
 
 
 public class RegisterSteps {
 
     private final RegisterPage registerPage;
+    private final LoginPage loginPage;
     private final UserApi userApi = new UserApi();
     private WebDriver driver;
     private String accessToken;
 
     public RegisterSteps(WebDriver driver) {
         this.registerPage = new RegisterPage(driver);
+        this.loginPage = new LoginPage(driver);
         this.driver = driver;
     }
 
@@ -44,19 +44,17 @@ public class RegisterSteps {
 
     @Step("Redirect to login page")
     public void checkRegisterRedirectToLogin() {
-        new WebDriverWait(driver, Duration.ofSeconds(EXPLICIT_TIMEOUT))
-                .until(ExpectedConditions.urlContains("/login"));
+        loginPage.redirectToLoginPageLoader();
         assertEquals("Incorrect URL after registration user", LOGIN_PAGE_URL, driver.getCurrentUrl());
     }
 
     @Step("Correct password error message")
     public void checkIncorrectPasswordErrorMessage() {
-        new WebDriverWait(driver, Duration.ofSeconds(EXPLICIT_TIMEOUT))
-                .until(ExpectedConditions.visibilityOfElementLocated(registerPage.getRegisterPasswordInputErrorElement()));
-        assertTrue("Password error message element not on page", driver.findElement(registerPage.getRegisterPasswordInputErrorElement()).isDisplayed());
+        registerPage.passwordInputErrorLoader();
+        assertTrue("Password error message element not on page", driver.findElement(registerPage.getRegisterPasswordInputError()).isDisplayed());
         assertEquals("Error message text is different", INCORRECT_PASSWORD_REGISTER_ERROR_MSG,
-                driver.findElement(registerPage.getRegisterPasswordInputErrorElement()).getText());
-        Allure.step("Password error message: " + driver.findElement(registerPage.getRegisterPasswordInputErrorElement()).getText());
+                registerPage.getRegisterPasswordInputErrorText());
+        Allure.step("Password error message: " + registerPage.getRegisterPasswordInputErrorText());
     }
 
     @Step("Get access token")
