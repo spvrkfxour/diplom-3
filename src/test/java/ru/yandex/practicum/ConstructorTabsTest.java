@@ -1,6 +1,5 @@
 package ru.yandex.practicum;
 
-import static ru.yandex.practicum.constant.EnvConst.*;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.Before;
 import org.junit.Rule;
@@ -26,13 +25,29 @@ public class ConstructorTabsTest {
     }
 
     @Test
-    @DisplayName("Constructor tabs navigate correctly")
-    public void constructorTabsTest() {
+    @DisplayName("Constructor buns tab after redirect displayed correctly")
+    public void BunsTabAfterRedirectTest() {
         mainPageSteps.checkBunsSectionTop();
+    }
+
+    @Test
+    @DisplayName("Constructor sauces tab after click displayed correctly")
+    public void SaucesTabAfterClickTest() {
         mainPageSteps.clickSaucesTab();
         mainPageSteps.checkSaucesSectionTop();
+    }
+
+    @Test
+    @DisplayName("Constructor fillings tab after click displayed correctly")
+    public void FillingsTabAfterClickTest() {
         mainPageSteps.clickFillingsTab();
         mainPageSteps.checkFillingsSectionTop();
+    }
+
+    @Test
+    @DisplayName("Constructor buns tab after click displayed correctly")
+    public void BunsTabAfterClickTest() {
+        mainPageSteps.clickFillingsTab();
         mainPageSteps.clickBunsTab();
         mainPageSteps.checkBunsSectionTop();
     }
