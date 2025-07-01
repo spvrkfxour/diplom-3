@@ -3,6 +3,7 @@ package ru.yandex.practicum.pages;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -77,5 +78,19 @@ public class MainPage {
     public void redirectToMainPageLoader() {
         new WebDriverWait(driver, Duration.ofSeconds(EXPLICIT_TIMEOUT))
                 .until(ExpectedConditions.urlToBe(URL));
+    }
+
+    public void waitForScrollCompletion(By sectionName) {
+
+        new WebDriverWait(driver, Duration.ofSeconds(EXPLICIT_TIMEOUT))
+                .until(driver -> {
+            WebElement section = driver.findElement(sectionName);
+            WebElement container = driver.findElement(getIngredientsContainer());
+
+            int sectionTop = section.getLocation().getY();
+            int containerTop = container.getLocation().getY();
+
+            return sectionTop >= containerTop && sectionTop <= containerTop + 50;
+        });
     }
 }

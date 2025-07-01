@@ -6,20 +6,15 @@ import static ru.yandex.practicum.constant.EnvConst.*;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.yandex.practicum.pages.AccountPage;
 import ru.yandex.practicum.pages.LoginPage;
 import ru.yandex.practicum.pages.MainPage;
-import java.time.Duration;
 
 
 public class MainPageSteps {
 
     private final MainPage mainPage;
     private WebDriver driver;
-    private final WebDriverWait wait;
     private final LoginPage loginPage;
     private final AccountPage accountPage;
 
@@ -28,7 +23,6 @@ public class MainPageSteps {
         this.loginPage = new LoginPage(driver);
         this.accountPage = new AccountPage(driver);
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(EXPLICIT_TIMEOUT));
     }
 
     @Step("Open main page")
@@ -101,25 +95,12 @@ public class MainPageSteps {
 
     @Step("Check ingredients container - {sectionName} top")
     public void checkIngredientContainerTop(By sectionName) {
-        waitForScrollCompletion(sectionName);
+        mainPage.waitForScrollCompletion(sectionName);
 
         int sectionTop = mainPage.getSectionCoordinatesY(sectionName);
         int containerTop = mainPage.getIngredientsContainerCoordinatesY();
 
         assertTrue("Selected section " + sectionName + " not on top of ingredients container",
                 sectionTop >= containerTop && sectionTop <= containerTop + 50);
-    }
-
-    private void waitForScrollCompletion(By sectionName) {
-
-        wait.until(driver -> {
-            WebElement section = driver.findElement(sectionName);
-            WebElement container = driver.findElement(mainPage.getIngredientsContainer());
-
-            int sectionTop = section.getLocation().getY();
-            int containerTop = container.getLocation().getY();
-
-            return sectionTop >= containerTop && sectionTop <= containerTop + 50;
-        });
     }
 }
