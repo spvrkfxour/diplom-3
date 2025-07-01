@@ -88,7 +88,7 @@ public class LoginTest {
         Allure.parameter("Entry Point", entryPoint.toString());
         performLoginBasedOnEntryPoint(entryPoint);
         mainPageSteps.checkMainRedirectToLogin();
-        loginSteps.checkLoginUser(registerEmail, registerPassword);
+        loginSteps.checkUserCanLogin(registerEmail, registerPassword);
     }
 
     @Step("Login user {entryPoint}")

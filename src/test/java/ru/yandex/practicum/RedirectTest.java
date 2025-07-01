@@ -71,7 +71,7 @@ public class RedirectTest {
     @DisplayName("Auth user redirect to account page")
     public void authUserRedirectToAccountPageTest() {
         loginSteps.addAccessTokenToLocalStorage(request);
-        loginSteps.checkUserIsLogin();
+        loginSteps.checkUserIsLoginAccountPage();
         accountPageSteps.checkAccountEmail(registerEmail);
     }
 

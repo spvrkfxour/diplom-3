@@ -43,7 +43,7 @@ public class LoginSteps {
     }
 
     @Step("Check user is login in account page")
-    public void checkUserIsLogin() {
+    public void checkUserIsLoginAccountPage() {
         mainPageSteps.clickAccountProfilePageButtonToAccount();
         assertEquals("Account profile page do not open", ACCOUNT_PROFILE_PAGE_URL, driver.getCurrentUrl());
     }
@@ -55,10 +55,10 @@ public class LoginSteps {
     }
 
     @Step("Check login user is correct")
-    public void checkLoginUser(String email, String password) {
+    public void checkUserCanLogin(String email, String password) {
         loginUser(email, password);
         checkLoginRedirectToMain();
-        checkUserIsLogin();
+        checkUserIsLoginAccountPage();
         accountPageSteps.checkAccountEmail(email);
     }
 
