@@ -1,8 +1,12 @@
 package ru.yandex.practicum.pages;
 
+import static ru.yandex.practicum.constant.EnvConst.EXPLICIT_TIMEOUT;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import java.time.Duration;
 
 
 @Getter
@@ -10,7 +14,7 @@ public class AccountPage {
 
     private final WebDriver driver;
 
-    private final By accountProfileEmail = By.xpath("//label[text()='Логин']/../*[self::input]");
+    private final By accountProfileEmailInput = By.xpath("//label[text()='Логин']/../*[self::input]");
     private final By logoutButton = By.xpath("//button[text()='Выход']");
 
     public AccountPage(WebDriver driver) {
@@ -18,6 +22,12 @@ public class AccountPage {
     }
 
     public void clickLogoutButton() {
+        new WebDriverWait(driver, Duration.ofSeconds(EXPLICIT_TIMEOUT))
+                .until(ExpectedConditions.elementToBeClickable(logoutButton));
         driver.findElement(logoutButton).click();
+    }
+
+    public String getAccountPageUserEmail() {
+        return driver.findElement(getAccountProfileEmailInput()).getDomAttribute("value");
     }
 }

@@ -1,10 +1,14 @@
 package ru.yandex.practicum.pages;
 
+import static ru.yandex.practicum.constant.EnvConst.EXPLICIT_TIMEOUT;
 import static ru.yandex.practicum.constant.EnvConst.URL;
-
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 
 @Getter
@@ -68,5 +72,10 @@ public class MainPage {
         return driver.findElement(sectionName)
                 .getLocation()
                 .getY();
+    }
+
+    public void redirectToMainPageLoader() {
+        new WebDriverWait(driver, Duration.ofSeconds(EXPLICIT_TIMEOUT))
+                .until(ExpectedConditions.urlToBe(URL));
     }
 }

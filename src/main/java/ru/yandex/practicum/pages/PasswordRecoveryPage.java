@@ -1,7 +1,6 @@
 package ru.yandex.practicum.pages;
 
 import static ru.yandex.practicum.constant.EnvConst.PASSWORD_RECOVERY_PAGE_URL;
-
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
