@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static ru.yandex.practicum.constant.EnvConst.*;
 import io.qameta.allure.Step;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -71,8 +72,23 @@ public class MainPageSteps {
         assertEquals("Incorrect URL after click button user", LOGIN_PAGE_URL, driver.getCurrentUrl());
     }
 
+    @Step("Check buns section top")
+    public void checkBunsSectionTop() {
+        checkIngredientContainerTop(mainPage.getBunsSection());
+    }
+
+    @Step("Check sauces section top")
+    public void checkSaucesSectionTop() {
+        checkIngredientContainerTop(mainPage.getSaucesSection());
+    }
+
+    @Step("Check fillings section top")
+    public void checkFillingsSectionTop() {
+        checkIngredientContainerTop(mainPage.getFillingsSection());
+    }
+
     @Step("Check ingredients container - {sectionName} top")
-    public void checkIngredientContainerTop(String sectionName) {
+    public void checkIngredientContainerTop(By sectionName) {
         waitForScrollCompletion(sectionName);
 
         int sectionTop = mainPage.getSectionCoordinatesY(sectionName);
@@ -82,10 +98,10 @@ public class MainPageSteps {
                 sectionTop >= containerTop && sectionTop <= containerTop + 50);
     }
 
-    private void waitForScrollCompletion(String sectionName) {
+    private void waitForScrollCompletion(By sectionName) {
 
         wait.until(driver -> {
-            WebElement section = driver.findElement(mainPage.getIngredientsSection(sectionName));
+            WebElement section = driver.findElement(sectionName);
             WebElement container = driver.findElement(mainPage.getIngredientsContainer());
 
             int sectionTop = section.getLocation().getY();

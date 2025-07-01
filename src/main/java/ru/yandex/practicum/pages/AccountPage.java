@@ -1,9 +1,11 @@
 package ru.yandex.practicum.pages;
 
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 
+@Getter
 public class AccountPage {
 
     private final WebDriver driver;
@@ -15,15 +17,7 @@ public class AccountPage {
         this.driver = driver;
     }
 
-    public By getAccountProfileEmail() {
-        return accountProfileEmail;
-    }
-
     public void clickLogoutButton() {
         driver.findElement(logoutButton).click();
-    }
-
-    public By getLogoutButton() {
-        return logoutButton;
     }
 }

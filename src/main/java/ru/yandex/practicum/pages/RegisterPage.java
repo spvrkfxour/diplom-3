@@ -1,10 +1,13 @@
 package ru.yandex.practicum.pages;
 
 import static ru.yandex.practicum.constant.EnvConst.REGISTER_PAGE_URL;
+
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 
+@Getter
 public class RegisterPage {
 
     private final WebDriver driver;

@@ -1,10 +1,13 @@
 package ru.yandex.practicum.pages;
 
 import static ru.yandex.practicum.constant.EnvConst.URL;
+
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 
+@Getter
 public class MainPage {
 
     private final WebDriver driver;
@@ -17,6 +20,9 @@ public class MainPage {
     private final By saucesTab = By.xpath("//div[contains(@class, 'tab_tab__1SPyG') and .//span[text()='Соусы']]");
     private final By fillingsTab = By.xpath("//div[contains(@class, 'tab_tab__1SPyG') and .//span[text()='Начинки']]");
     private final By ingredientsContainer = By.className("BurgerIngredients_ingredients__menuContainer__Xu3Mo");
+    private final By bunsSection = By.xpath("//h2[text()='Булки']");
+    private final By saucesSection = By.xpath("//h2[text()='Соусы']");
+    private final By fillingsSection = By.xpath("//h2[text()='Начинки']");
 
     public MainPage(WebDriver driver) {
         this.driver = driver;
@@ -54,21 +60,13 @@ public class MainPage {
         driver.findElement(fillingsTab).click();
     }
 
-    public By getIngredientsContainer() {
-        return ingredientsContainer;
-    }
-
     public int getIngredientsContainerCoordinatesY() {
         return driver.findElement(ingredientsContainer).getLocation().getY();
     }
 
-    public int getSectionCoordinatesY(String sectionName) {
-        return driver.findElement(getIngredientsSection(sectionName))
+    public int getSectionCoordinatesY(By sectionName) {
+        return driver.findElement(sectionName)
                 .getLocation()
                 .getY();
-    }
-
-    public By getIngredientsSection(String sectionName) {
-        return By.xpath("//h2[text()='" + sectionName + "']");
     }
 }

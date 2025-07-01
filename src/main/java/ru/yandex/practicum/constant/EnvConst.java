@@ -19,8 +19,4 @@ public class EnvConst {
     public static final int EXPLICIT_TIMEOUT = 3;
 
     public static final String INCORRECT_PASSWORD_REGISTER_ERROR_MSG = "Некорректный пароль";
-
-    public static final String INGREDIENTS_SECTION_NAME_BUNS = "Булки";
-    public static final String INGREDIENTS_SECTION_NAME_SAUCES = "Соусы";
-    public static final String INGREDIENTS_SECTION_NAME_FILLINGS = "Начинки";
 }

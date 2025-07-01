@@ -28,12 +28,12 @@ public class ConstructorTabsTest {
     @Test
     @DisplayName("Constructor tabs navigate correctly")
     public void constructorTabsTest() {
-        mainPageSteps.checkIngredientContainerTop(INGREDIENTS_SECTION_NAME_BUNS);
+        mainPageSteps.checkBunsSectionTop();
         mainPageSteps.clickSaucesTab();
-        mainPageSteps.checkIngredientContainerTop(INGREDIENTS_SECTION_NAME_SAUCES);
+        mainPageSteps.checkSaucesSectionTop();
         mainPageSteps.clickFillingsTab();
-        mainPageSteps.checkIngredientContainerTop(INGREDIENTS_SECTION_NAME_FILLINGS);
+        mainPageSteps.checkFillingsSectionTop();
         mainPageSteps.clickBunsTab();
-        mainPageSteps.checkIngredientContainerTop(INGREDIENTS_SECTION_NAME_BUNS);
+        mainPageSteps.checkBunsSectionTop();
     }
 }

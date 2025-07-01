@@ -1,9 +1,11 @@
 package ru.yandex.practicum.pages;
 
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 
+@Getter
 public class LoginPage {
 
     private final WebDriver driver;
