@@ -23,7 +23,6 @@ public class RegisterTest {
     private WebDriver driver;
     private RegisterSteps registerSteps;
     private LoginSteps loginSteps;
-
     private String registerName;
     private String registerEmail;
     private String registerPassword;

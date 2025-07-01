@@ -32,7 +32,6 @@ public class LoginTest {
     private RegisterSteps registerSteps;
     private MainPageSteps mainPageSteps;
     private PasswordRecoveryPageSteps passwordRecoveryPageSteps;
-
     private String registerName;
     private String registerEmail;
     private String registerPassword;

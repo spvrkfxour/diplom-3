@@ -27,7 +27,6 @@ public class LogoutTest {
     private LoginSteps loginSteps;
     private MainPageSteps mainPageSteps;
     private AccountPageSteps accountPageSteps;
-
     private String registerName;
     private String registerEmail;
     private String registerPassword;

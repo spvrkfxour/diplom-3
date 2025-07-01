@@ -27,7 +27,7 @@ public class RedirectTest {
     private RegisterSteps registerSteps;
     private MainPageSteps mainPageSteps;
     private AccountPageSteps accountPageSteps;
-
+    private LoginUserRequest request;
     private String registerName;
     private String registerEmail;
     private String registerPassword;
@@ -42,6 +42,7 @@ public class RedirectTest {
 
         createTestUser();
         mainPageSteps.openMainPage();
+        request = new LoginUserRequest(registerEmail, registerPassword);
     }
 
     private void createTestUser() {
@@ -69,7 +70,6 @@ public class RedirectTest {
     @Test
     @DisplayName("Auth user redirect to account page")
     public void authUserRedirectToAccountPageTest() {
-        LoginUserRequest request = new LoginUserRequest(registerEmail, registerPassword);
         loginSteps.addAccessTokenToLocalStorage(request);
         loginSteps.checkUserIsLogin();
         accountPageSteps.checkAccountEmail(registerEmail);
@@ -78,7 +78,6 @@ public class RedirectTest {
     @Test
     @DisplayName("Constructor tab redirect to main page from account page")
     public void constructorTabRedirectToMainPageTest() {
-        LoginUserRequest request = new LoginUserRequest(registerEmail, registerPassword);
         loginSteps.addAccessTokenToLocalStorage(request);
         mainPageSteps.clickAccountProfilePageButton();
         mainPageSteps.clickConstructorButton();
@@ -88,7 +87,6 @@ public class RedirectTest {
     @Test
     @DisplayName("Logo redirect to main page from account page")
     public void logoRedirectToMainPageTest() {
-        LoginUserRequest request = new LoginUserRequest(registerEmail, registerPassword);
         loginSteps.addAccessTokenToLocalStorage(request);
         mainPageSteps.clickAccountProfilePageButton();
         mainPageSteps.clickLogo();
@@ -97,7 +95,6 @@ public class RedirectTest {
 
     @After
     public void tearDown() {
-        LoginUserRequest request = new LoginUserRequest(registerEmail, registerPassword);
         registerSteps.deleteUser(request);
     }
 }
