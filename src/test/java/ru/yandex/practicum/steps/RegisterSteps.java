@@ -59,9 +59,14 @@ public class RegisterSteps {
         Allure.step("Password error message: " + driver.findElement(registerPage.getRegisterPasswordInputErrorElement()).getText());
     }
 
+    @Step("Get access token")
+    public String getAccessToken(LoginUserRequest request) {
+        return userApi.getAccessToken(request);
+    }
+
     @Step("Delete user")
     public void deleteUser(LoginUserRequest request) {
-        accessToken = userApi.getAccessToken(request);
+        accessToken = getAccessToken(request);
         if (accessToken != null) {
             Response response = userApi.deleteUser(accessToken);
             Allure.step("Delete user: " + response.getBody().asString());
